@@ -9,6 +9,5 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 function isMatchingAMap(url) {
-  return maps
-    .find(map => map.urlPattern && map.urlPattern.test(url));
+  return maps.find(map => map.urlPattern && map.urlPattern.test(url));
 }

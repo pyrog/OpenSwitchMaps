@@ -434,6 +434,7 @@ module.exports = [{
     domain: "map.openseamap.org",
 //    urlPattern: /map\.openseamap\.org/,
     getUrl(lat, lon, zoom) {
+      if(zoom>18) zoom=18;
       return 'http://map.openseamap.org/?zoom=' + zoom + '&lat=' + lat + '&lon=' + lon;
     },
 /*
@@ -449,6 +450,7 @@ module.exports = [{
     domain: "maps.grade.de",
 //    urlPattern: /maps\.grade\.de/,
     getUrl(lat, lon, zoom) {
+      if(zoom>18) zoom=18;
       return 'http://maps.grade.de/?zoom=' + zoom + '&lat=' + lat + '&lon=' + lon;
     },
 /*
@@ -463,6 +465,7 @@ module.exports = [{
     category: "YP",
     //urlPattern: /www\.freietonne\.de/,
     getUrl(lat, lon, zoom) {
+      if(zoom>17) zoom=17;
       return 'https://www.freietonne.de/seekarte/?zoom=' + zoom + '&lat=' + lat + '&lon=' + lon;
     },
   },
@@ -517,9 +520,19 @@ module.exports = [{
     category: "YP",
     domain: "aprs.fi",
     getUrl(lat, lon, zoom) {
+      // map type
+      // &mt=osm
+      // &mt=terrain
+      // &mt=hybrid
+      // &mt=satellite (not available in the drop down list)
+      if(zoom>20) zoom=20;
       return 'https://aprs.fi/#!lat=' + lat + '&lng=' + lon + '&z=' +zoom;
     },
+    // How to add a permalink
+    // right click on the map -> add marker
+    // click on the marker -> link to this position
   },
+  
   {
     name: "OpenRailwayMap",
     category: "YP",
@@ -549,6 +562,7 @@ module.exports = [{
     category: "YP",
     domain: "gk.historic.place",
     getUrl(lat, lon, zoom) {
+      if(zoom>19) zoom=19;
       return 'https://gk.historic.place/historische_objekte/l/en/index.html?lat=' + lat + '&lon=' + lon + '&zoom=' +zoom;
     },
     // parameter to select an OSM object
@@ -564,10 +578,10 @@ module.exports = [{
     // TODO
     // https://josm.openstreetmap.de/wiki/Help/RemoteControlCommands
   },
-   {
+  {
     name: "Wizard",
-    category: "YP",     //todo hide the wizard from tab
-    urlPattern: /.*/,   //todo don't respond to all site, just maps
+    category: null,     // hidden map
+    urlPattern: /.*/,   // todo don't respond to all site, just maps
 /*
     getUrl(lat, lon, zoom) {
       return null;

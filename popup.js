@@ -5,11 +5,15 @@ const columns = {};
 maps.forEach(map => {
   const element = makeMapElement(map);
   let column = columns[map.category];
-  if (!column) {
-    column = columns[map.category] = makeColum(map.category);
-    body.appendChild(column);
+  
+  // Add only maps with a category (others are hidden)
+  if (map.category != null) {
+	if (!column) {
+	  column = columns[map.category] = makeColum(map.category);
+	  body.appendChild(column);
+	}
+    column.appendChild(element);
   }
-  column.appendChild(element);
 });
 
 function getLatLonZoom(url) {
